@@ -1,6 +1,7 @@
 from django.db import models
 
 class Tag(models.Model):
+    
     name = models.CharField(max_length=256, verbose_name='Название')
 
     class Meta:
@@ -25,12 +26,17 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-    
-class Scope(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article')
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='tag')
 
-    is_main = models.BooleanField()
+class Scope(models.Model):
+
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scope')
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='scope')
+
+    is_main = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.is_main)
+
 
 
     

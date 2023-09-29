@@ -10,6 +10,10 @@ def articles_list(request):
     ordering = '-published_at'
 
     news = Article.objects.order_by(ordering).all()
+    for article in news:
+        print(article.title)
+        for scope in article.scopes.all():
+            print(scope)
 
     context = {'object_list': news}
 
